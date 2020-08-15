@@ -1,8 +1,6 @@
-# This code was written by Arbian Halilaj for the Bachelor's Thesis at the
-# University of St. Gallen.
-# Supervisor: Prof. Charles Gottlieb
-# For questions contact arbian.halilaj@student.unisg.ch
-# Last tested: 23/06/2020
+# This code was written by Arbian Halilaj for the Bachelor's Thesis
+# For questions contact arbian.halilaj@hotmail.com
+# Last tested: 14/08/2020
 
 # Setup and data preparation
 
@@ -13,9 +11,9 @@ library(car) #Multicollinearity test
 library(reshape2) #Correlation matrix
 library(stargazer) #Output
 library(ggpubr)
-library(ggfortify) #autoplot diagnostics
+library(ggfortify) #Autoplot diagnostics
 library(lmtest) #Breusch-Pagan Test (Heteroskedasticity)
-library(mfx) #marginal effects
+library(mfx) #Marginal effects
 
 rm(list = ls()) # memory cleaning
 
@@ -24,7 +22,7 @@ rm(list = ls()) # memory cleaning
 library(foreign)
 
 # Importing data from stata file
-data <- read.dta("/Users/arbiax/Desktop/BA_firsttry/trashba/Albania2019.dta")
+data <- read.dta("file source")
 
 # Select variables of interest
 selected <- c("h1", "h5", "d2", "n3", "l1", "l2", "f1", "n2p", "e11", "e30", "j7a", 
@@ -376,8 +374,6 @@ df <- df %>% replace_with_na(replace = list(Experience = -9))
 df$lnExperience <- log(df$Experience)
 df <- df %>% replace_with_na(replace = list(lnExperience = "NaN"))
 ###################################################################
-
-###################################################################
 # REGRESSION MODELS
 ###################################################################
 # Descriptive Stats
@@ -426,12 +422,8 @@ get_upper_tri_week <- function(cormatweek){
   return(cormatweek)
 }
 
-
 upper_tri_week <- get_upper_tri_week(cormatweek)
-#upper_tri_week
 melted_cormat_week <- melt(upper_tri_week, na.rm = TRUE)
-
-
 
 ggheatmap <- ggplot(data = melted_cormat_week, aes(Var2, Var1, fill = value))+
   geom_tile(color = "white")+
@@ -495,7 +487,7 @@ Model1.1.5 <- lm(SalesGrowth ~ Sector + Small + Medium + lnAge + lnExperience + 
 Model1.1.6 <- lm(SalesGrowth ~ Sector + Small + Medium + lnAge + lnExperience + Foreign + Export + TrainingEmployees + RD + Bribes*InformalCompetition, data=df_model1)
 
 summary(Model1.1.6)
-stargazer(Model1.1.1, Model1.1.2, Model1.1.3, Model1.1.4, Model1.1.5, Model1.1.6, title="Results", align=TRUE, no.space=TRUE)
+stargazer(Model1.1.1, Model1.1.2, Model1.1.3, Model1.1.4, Model1.1.5, Model1.1.6, title="Results of Model SB", align=TRUE, no.space=TRUE)
 
 ##Tests
 ###Multicollinearity
@@ -507,9 +499,9 @@ stargazer(correlation.matrix, title="Correlation Matrix")
 vif1 <- vif(Model1.1.6)
 round(vif1, digits=2)
 
-1###Diagnostics
+###Diagnostics
 par(mfrow=c(2,2))
-plot(Model1.1.) #or autoplot(model)
+plot(Model1.1.1)
 autoplot(Model1.1.2)
 
 plot(Model1.1.5, 1) #Linearity
