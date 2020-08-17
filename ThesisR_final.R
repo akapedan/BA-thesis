@@ -1,8 +1,6 @@
-# This code was written by Arbian Halilaj for the Bachelor's Thesis at the
-# University of St. Gallen.
-# Supervisor: Prof. Charles Gottlieb
-# For questions contact arbian.halilaj@student.unisg.ch
-# Last tested: 23/06/2020
+# This code was written by Arbian Halilaj for the Bachelor's Thesis
+# For questions contact arbian.halilaj@hotmail.ch
+# Last tested: 16/08/2020
 
 # Setup and data preparation
 
